@@ -1,0 +1,108 @@
+.loginContainer {
+  min-height: 100vh;
+  background-color: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px
+}
+.loginBox {
+  width: 100%;
+  max-width: 420px
+}
+.headerSection {
+  text-align: center;
+  margin-bottom: 32px
+}
+.logoWrapper {
+  width: 52px;
+  height: 52px;
+  background-color: #3B82F6;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px
+}
+.logoLetter {
+  color: #FFFFFF;
+  font-size: 22px;
+  font-weight: 800
+}
+.mainTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px;
+}
+.description {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inputLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+.textInput {
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #0F172A;
+  outline: none;
+}
+.textInput:focus {
+  border-color: #3B82F6;
+  background: #FFFFFF;
+}
+.inputInvalid {
+  border-color: #EF4444;
+  background: #FFF5F5;
+}
+.errorMessage {
+  font-size: 12px;
+  color: #EF4444;
+  font-weight: 500;
+}
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.checkboxRow input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: #3B82F6
+}
+.checkboxLabel {
+  font-size: 13px;
+  color: #475569;
+  font-weight: 500
+}
+.submitBtn {
+  background-color: #3B82F6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 700
+}

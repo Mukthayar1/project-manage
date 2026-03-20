@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+}
+.card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 20px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.badge {
+  width: 60px;
+  height: 22px;
+  border-radius: 20px;
+  background: #F1F5F9;
+}
+.line {
+  background: #F1F5F9;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
