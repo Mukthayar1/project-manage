@@ -16,7 +16,6 @@ const TaskItem = ({ task, onToggle, isLoading }) => {
         type="checkbox"
         checked={task.completed}
         onChange={() => onToggle(task.id)}
-        disabled={isLoading}
       />
       <div className={styles.content}>
         <div className={`${styles.title} ${task.completed ? styles.titleCompleted : ''}`}>
@@ -30,7 +29,7 @@ const TaskItem = ({ task, onToggle, isLoading }) => {
         </div>
       </div>
       <span className={styles.updated}>
-        {isLoading ? 'Saving...' : task.completed ? 'Done ✓' : ''}
+        {task.completed ? 'Done' : ''}
       </span>
     </div>
   );

@@ -23,6 +23,7 @@ const getTasks = (projectId) => async (dispatch) => {
     console.log('prjtId=>', projectId)
     await wait(600)
     const tasks = mockTasks[projectId] || []
+    console.log('===>',tasks);
     dispatch(setTasks({ projectId, tasks }))
     dispatch(setLoading(false))
   } catch (error) {

@@ -117,7 +117,6 @@ const ProjectDetailScreen = () => {
               key={task.id}
               task={task}
               onToggle={handleToggle}
-              isLoading={!!taskLoading[task.id]}
             />
           ))
         )}

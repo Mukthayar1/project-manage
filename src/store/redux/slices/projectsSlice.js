@@ -31,8 +31,13 @@ const projectsSlice = createSlice({
     },
     setTasks: (state, action) => {
       const { projectId, tasks } = action.payload;
-      console.log(projectId, tasks.length);
-      state.tasks[projectId] = tasks;
+      console.log('projectId',projectId);
+      console.log('tasks',tasks);
+      if (tasks?.length == 0) {
+        state.tasks[projectId] = [];
+      } else {
+        state.tasks[projectId] = tasks;
+      }
       state.isLoading = false;
     },
     toggleTaskComplete: (state, action) => {
