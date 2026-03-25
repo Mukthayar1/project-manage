@@ -1,14 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice'
-import projectsReducer from './slices/projectsSlice'
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { thunk } from 'redux-thunk';
+import authReducer from './reducer/authReducer';
+import projectsReducer from './reducer/projectReducer';
 
-export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    projects: projectsReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+const rootReducer = combineReducers({
+  auth: authReducer,
+  projects: projectsReducer,
 });
+
+export const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);

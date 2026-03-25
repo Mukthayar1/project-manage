@@ -1,24 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess, logout } from '../store/redux/slices/authSlice'
+import { loginSuccess, logout } from '../store/redux/actions/authAction';
 
 export const useAuth = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   const login = (email, password, rememberMe) => {
     if (email.includes('@') && password.length >= 8) {
-      dispatch(loginSuccess({
-        email,
-        token: 'fake-jwt-token-' + Date.now(),
-        rememberMe,
-      }));
+      dispatch(
+        loginSuccess({
+          email,
+          token: 'fake-jwt-token-' + Date.now(),
+          rememberMe,
+        })
+      );
       return true;
     }
     return false;
   };
 
   const logoutUser = () => {
-    dispatch(logout())
+    dispatch(logout());
   };
 
   return {

@@ -1,58 +1,46 @@
-import { mockProjects, mockTasks } from '../../../constants/mockData'
-import { setLoading, setError, setProjects, setTasks, toggleTaskComplete, revertTaskComplete, setTaskLoading, addProject, updateProject } from '../slices/projectsSlice'
+import { mockProjects, mockTasks } from '../../../constants/mockData';
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const getProjects = () => async (dispatch) => {
-  dispatch(setLoading(true))
+export const getProjects = () => async (dispatch) => {
   try {
-    await wait(800)
-    console.log('projects added=>', mockProjects.length)
-    dispatch(setProjects(mockProjects))
-    dispatch(setLoading(false))
+    await wait(800);
+    dispatch({ type: "loadingProjects", payload: mockProjects });
   } catch (error) {
-    console.log('error loading projects', error)
-    dispatch(setError('Failed to load projects.'))
-    dispatch(setLoading(false))
+    console.log('error loading projects', error);
   }
-}
+};
 
-const getTasks = (projectId) => async (dispatch) => {
-  dispatch(setLoading(true))
+export const getTasks = (projectId) => async (dispatch) => {
   try {
-    console.log('prjtId=>', projectId)
-    await wait(600)
-    const tasks = mockTasks[projectId] || []
-    console.log('===>',tasks);
-    dispatch(setTasks({ projectId, tasks }))
-    dispatch(setLoading(false))
+    console.log('prjtId=>', projectId);
+    await wait(600);
+
+    const tasks = mockTasks[projectId] || [];
+    console.log('===>', tasks);
+
+    dispatch({ type: "loadTask", payload: { projectId, tasks } });
   } catch (error) {
-    console.log('error loading tasks', error)
-    dispatch(setError('Failed to load tasks.'))
+    console.log('error loading tasks', error);
   }
-}
+};
 
-const updateTaskStatus = (projectId, taskId) => async (dispatch) => {
-  console.log(projectId, taskId)
-  dispatch(toggleTaskComplete({ projectId, taskId }))
-  dispatch(setTaskLoading({ taskId, value: true }))
+export const updateTaskStatus = (projectId, taskId) => async (dispatch) => {
+  dispatch({ type: "toggleTask", payload: { projectId, taskId } });
   try {
-    await wait(700)
-    console.log('task updated')
-    dispatch(setTaskLoading({ taskId, value: false }))
+    await wait(700);
+    console.log('task updated');
   } catch (error) {
-    console.log('error updating task', error)
-    dispatch(revertTaskComplete({ projectId, taskId }))
-    dispatch(setTaskLoading({ taskId, value: false }))
+    console.log('error updating task', error);
+    dispatch({ type: "revertTask", payload: { projectId, taskId } });
   }
-}
+};
 
-const createProject = (data) => async (dispatch) => {
-  console.log('data===><>', data)
-  dispatch(setLoading(true))
+export const createProject = (data) => async (dispatch) => {
+  console.log('data===><>', data);
   try {
-    console.log('strat project')
-    await wait(700)
+    await wait(700);
+
     const newProject = {
       ...data,
       id: Date.now().toString(),
@@ -62,35 +50,21 @@ const createProject = (data) => async (dispatch) => {
         day: 'numeric',
         year: 'numeric',
       }),
-    }
-    console.log('end project')
-    dispatch(addProject(newProject))
-    dispatch(setLoading(false))
-  } catch (error) {
-    console.log('error creating project', error)
-    dispatch(setError('Failed to create project.'))
-    dispatch(setLoading(false))
-  }
-}
+    };
 
-const editProject = (data) => async (dispatch) => {
-  console.log('data=<>>>>', data)
-  dispatch(setLoading(true))
+    dispatch({ type: "addNewProjct", payload: newProject });
+  } catch (error) {
+    console.log('error creating project', error);
+  }
+};
+
+export const editProject = (data) => async (dispatch) => {
+  console.log('data=<>>>>', data);
   try {
-    await wait(700)
-    console.log('project updated')
-    dispatch(updateProject(data))
-    dispatch(setLoading(false))
-  } catch (error) {
-    console.log('error updating project', error)
-    dispatch(setError('Failed to update project.'))
-  }
-}
+    await wait(700);
 
-export {
-  getProjects,
-  getTasks,
-  updateTaskStatus,
-  createProject,
-  editProject
-}
+    dispatch({ type: "updateProject", payload: data });
+  } catch (error) {
+    console.log('error updating project', error);
+  }
+};

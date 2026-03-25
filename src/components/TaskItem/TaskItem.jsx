@@ -7,8 +7,7 @@ const priorityClass = {
   Low: styles.badgeLow,
 };
 
-const TaskItem = ({ task, onToggle, isLoading }) => {
-  console.log('task==>',task);
+const TaskItem = ({ task, onToggle }) => {
   return (
     <div className={styles.item}>
       <input

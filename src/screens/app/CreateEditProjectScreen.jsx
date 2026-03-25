@@ -7,8 +7,8 @@ const CreateEditProjectModal = ({ project, onClose }) => {
   console.log('curent project===>', project);
 
   const isEdit = !!project;
-  const { saveProject, loading } = useProjects();
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting }, } = useForm({
+  const { saveProject, projects } = useProjects();
+  const { register, handleSubmit, reset, setError, formState: { errors, isSubmitting }, } = useForm({
     defaultValues: {
       name: '',
       owner: '',
@@ -34,6 +34,18 @@ const CreateEditProjectModal = ({ project, onClose }) => {
   const onSubmit = async (data) => {
     console.log('data', data);
     console.log('isEdit:', isEdit);
+
+    const isDuplicate = projects?.some((p) =>
+      p?.name?.toLowerCase()?.trim() == data?.name?.toLowerCase()?.trim() && (!isEdit || p?.id != project?.id)
+    );
+
+    if (isDuplicate) {
+      setError('name', {
+        type: 'manual',
+        message: 'A project with this name already exists',
+      });
+      return;
+    }
 
     await saveProject(
       isEdit ? { ...data, id: project.id, progress: project.progress, createdAt: project.createdAt } : data,

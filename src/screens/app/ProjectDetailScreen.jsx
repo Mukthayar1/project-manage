@@ -6,20 +6,20 @@ import CreateEditProjectModal from './CreateEditProjectScreen';
 import styles from './ProjectDetailScreen.module.css';
 
 const ProjectDetailScreen = () => {
-  
+
   const { id } = useParams();
   const navigate = useNavigate();
-  const { projects, selectedProject, tasks, loading, taskLoading, loadTasks, selectProject, toggleTask } = useProjects();
+  const { projects, currentProject, tasks, loadTasks, selectProject, toggleTask } = useProjects();
 
   const [showEdit, setShowEdit] = useState(false);
-  
+
   console.log('id=>', id);
 
-  const project = selectedProject?.id == id
-    ? selectedProject
+  const project = currentProject?.id == id
+    ? currentProject
     : projects.find((p) => p.id == id);
-    
-  console.log('current project:', project);
+
+  console.log('current project=>', project);
 
   useEffect(() => {
     if (project) {
@@ -107,19 +107,14 @@ const ProjectDetailScreen = () => {
           </span>
         </div>
 
-        {loading ? (
-          <div className={styles.loadingState}>Loading tasks...</div>
-        ) : projectTasks.length == 0 ? (
-          <div className={styles.loadingState}>No tasks yet</div>
-        ) : (
-          projectTasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onToggle={handleToggle}
-            />
-          ))
-        )}
+        {projectTasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggle={handleToggle}
+          />
+        ))
+        }
       </div>
 
       {showEdit && (
